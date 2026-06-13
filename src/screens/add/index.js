@@ -12,7 +12,7 @@ const AddScreen = () => {
     setOutput('Adding string...');
     const file = {
       path: '/tmp/rn-ipfs-add-string',
-      content: '邑中陽裏人也，姓劉氏。母媼嘗息大澤之陂，夢與神遇',
+      content: 'A person from the county, surnamed Kumar. His mother once rested by the great marsh and dreamed of meeting a deity.',
     };
     try {
       const result = await client.add(file);
