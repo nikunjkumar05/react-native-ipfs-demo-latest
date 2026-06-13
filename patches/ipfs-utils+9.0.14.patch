@@ -1,0 +1,31 @@
+diff --git a/node_modules/ipfs-utils/src/http.js b/node_modules/ipfs-utils/src/http.js
+index 789abcd..ef01234 100644
+--- a/node_modules/ipfs-utils/src/http.js
++++ b/node_modules/ipfs-utils/src/http.js
+@@ -139,20 +139,11 @@ export class HTTP extends Implementations {
+ 
+     /** @type {ExtendedResponse} */
+     // @ts-expect-error additional fields are assigned below
+     const response = await timeout(
+       fetch(
+         url.toString(),
+-        {
+-          ...opts,
+-          signal,
+-          // @ts-expect-error non-browser fetch implementations may take extra options
+-          timeout: undefined,
+-          headers,
+-
+-          // https://fetch.spec.whatwg.org/#dom-requestinit-duplex
+-          // https://github.com/whatwg/fetch/issues/1254
+-          duplex: 'half'
+-        }
++        {
++          method: opts.method,
++          body: opts.body,
++          signal,
++          headers,
++        }
+       ),
+       opts.timeout,
+       abortController

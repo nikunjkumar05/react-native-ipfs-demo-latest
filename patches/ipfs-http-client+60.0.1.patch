@@ -1,0 +1,31 @@
+diff --git a/node_modules/ipfs-http-client/src/id.js b/node_modules/ipfs-http-client/src/id.js
+index a1b2c3d..e4f5a6b 100644
+--- a/node_modules/ipfs-http-client/src/id.js
++++ b/node_modules/ipfs-http-client/src/id.js
+@@ -31,7 +31,9 @@ export const createId = configure(api => {
+     output.id = peerIdFromString(output.id)
+ 
+     if (output.addresses) {
+-      output.addresses = output.addresses.map((/** @type {string} */ ma) => multiaddr(ma))
++      output.addresses = output.addresses.map((/** @type {string} */ ma) => {
++        try { return multiaddr(ma) } catch (e) { return ma }
++      })
+     }
+ 
+     // @ts-expect-error server output is not typed
+diff --git a/node_modules/ipfs-http-client/src/pubsub/subscribe.js b/node_modules/ipfs-http-client/src/pubsub/subscribe.js
+index 38fd85d..2b8c216 100644
+--- a/node_modules/ipfs-http-client/src/pubsub/subscribe.js
++++ b/node_modules/ipfs-http-client/src/pubsub/subscribe.js
+@@ -46,7 +46,10 @@ export const createSubscribe = (options, subsTracker) => {
+           arg: textToUrlSafeRpc(topic),
+           ...options
+         }),
+-        headers: options.headers
++        headers: options.headers,
++        reactNative: {
++          textStreaming: true
++        }
+       })
+         .catch((err) => {
+           // Initial subscribe fail, ensure we clean up
