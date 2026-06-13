@@ -30,7 +30,7 @@ Based on [react-native-ipfs-demo](https://github.com/ipfs-shipyard/react-native-
 npm install --force
 ```
 
-> Patches are applied automatically via `patch-package` in the postinstall script. The postinstall also removes stale `react-native-vector-icons` codegen artifacts that conflict with RN 0.86's app-level codegen.
+> Patches are applied automatically via `patch-package` in the postinstall script. The postinstall also removes stale `react-native-vector-icons` codegen artifacts that conflict with RN 0.86's app-level codegen. If a patch fails to apply (e.g. after modifying upstream source), regenerate it with `npx patch-package <package-name>`.
 
 ### 2. Start IPFS Desktop
 
